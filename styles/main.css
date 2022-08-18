@@ -1,0 +1,28 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+.central_card {
+    padding: 0.5rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    border-radius: 10px;
+    box-shadow: 0 .1rem .6rem #333, .1rem 0 .6rem #333, 0 -.1rem .6rem #333, -.1rem 0 .6rem #333;
+    color: #fff;
+    background-color: rgba(51, 3, 0, 0.2);
+}
+
+main {
+    padding: 2rem;
+    background-image: url(/img/lluvia.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* position: fixed; */
+    height: 100vh;
+}
