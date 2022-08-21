@@ -31,25 +31,24 @@ let fetchWeather = function(latitud, longitud) {
         .then(response => response.json())
         .then((data) => {
             console.log(data)
-            //buscarIcono(data.weather[0].id)
+            console.log(data.weather[0].id)
             return clima = {
-                //hora: calcularHora(data.timezone),
                 ciudad: data.name,
                 pais: data.sys.country,
+                id: data.weather[0].id,
                 icono: buscarIcono(calcularHora(data.timezone), data.weather[0].id),
                 descripcion: data.weather[0].description,
-                temperaturaActual: data.main.temp,
-                sensacionTermica: data.main.feels_like,
-                temperaturaMaxima: data.main.temp_max,
-                temperaturaMinima: data.main.temp_min,
-                presion: data.main.pressure,
-                humedad: data.main.humidity,
-                visibilidad: (data.visibility)/1000,
-                velocidadViento: (data.wind.speed)*3.6,
+                temperaturaActual: Math.round(data.main.temp),
+                sensacionTermica: Math.round(data.main.feels_like),
+                temperaturaMaxima: Math.round(data.main.temp_max),
+                temperaturaMinima: Math.round(data.main.temp_min),
+                presion: Math.round(data.main.pressure),
+                humedad: Math.round(data.main.humidity),
+                visibilidad: Math.round((data.visibility)/1000),
+                velocidadViento: Math.round((data.wind.speed)*3.6),
                 direccionViento: data.wind.deg
             }
         })
-        //poner un then aca
         .then(clima => {
             console.log(clima)
             mostrarDatos(clima)
@@ -100,19 +99,19 @@ let buscarIcono = function (hora, id) {
     if (6 < hora && hora < 19) {
         console.log(hora)
         switch(id){
-            case (200 < id && id < 299):
+            case (200 <= id < 299):
                 return "11d.svg"
                 break;
-            case 300 < id && id < 399:
+            case (300 <= id < 399):
                 return "09d.svg"
                 break;
-            case 500 < id && id < 505:
+            case (500 <= id < 505):
                 return "10d.svg"
                 break;
-            case 511 < id && id < 699:
+            case (511 <= id < 699):
                 return "13d.svg"
                 break;
-            case 700 < id && id< 799:
+            case (700 <= id< 799):
                 return "50d.svg"
                 break;
             case 800:
@@ -132,8 +131,23 @@ let buscarIcono = function (hora, id) {
                 break;
         }
     } else {
-        console.log(hora)
+        console.log("estas aca! Hora: ", hora)
         switch(id) {
+            case (id >= 200 && id < 300):
+                return "11n.svg"
+                break;
+            case (300 <= id < 399):
+                return "09n.svg"
+                break;
+            case (500 <= id < 505):
+                return "10n.svg"
+                break;
+            case (511 <= id < 699):
+                return "13n.svg"
+                break;
+            case (700 <= id < 799):
+                return "50n.svg"
+                break;
             case 800:
                 return "01n.svg"
                 break;
