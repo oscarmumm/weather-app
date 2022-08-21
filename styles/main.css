@@ -13,17 +13,13 @@
     align-items: center;
 
     border-radius: 30px;
-    /* box-shadow: 0 .1rem .6rem #333, .1rem 0 .6rem #333, 0 -.1rem .6rem #333, -.1rem 0 .6rem #333; */
     color: #fff;
     background-color: rgba(255, 255, 255, 0.1);
 }
 
 main {
     padding: 2rem;
-    background-image: url(/img/lluvia.webp);
-    background-repeat: no-repeat;
-    background-size: cover;
-    /* position: fixed; */
+    background-color: #142058;
     height: 100vh;
 }
 
