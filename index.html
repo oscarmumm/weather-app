@@ -9,7 +9,7 @@
 </head>
 <body>
     <main>
-        <div class="central_card" id="central_card">
+        <div class="central_card oculto" id="central_card">
             <div class="info_principal">
                 <img class="actual icono" src="" alt="icono de clima" id="icono-clima">
                 <h2 class="actual temperatura" id="temperatura-actual">Temperatura actual</h2>
@@ -23,7 +23,16 @@
             <p class="actual visibilidad" id="visibilidad">Visibilidad</p>
             <p class="actual viento" id="viento">Viento</p>
         </div>
-
+        <div class="central_card inicial" id="central_card_inicial">
+            <div class="icons-banner">
+                <img src="/icons/09n.svg" alt="">
+                <img src="/icons/01d.svg" alt="">
+                <img src="/icons/02d.svg" alt="">
+                <img src="/icons/11d.svg" alt="">
+            </div>
+            <h1>Bienvenido a la página del clima</h1>
+            <p>Permita el acceso a su ubicación para conocer el clima en su ciudad o utilice la barra de busqueda</p>
+        </div>
         <div class="barra-de-busqueda">
 
             <input type="text" name="buscador" id="buscador" class="buscador" placeholder="ingrese nombre de ciudad">

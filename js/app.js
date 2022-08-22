@@ -1,4 +1,9 @@
+// 'use strict'
+
 const apikey = "1e0852abb42466a00a4d6d999c3e2b64"
+
+const centralCard = document.getElementById("central_card")
+const centralCardInicial = document.getElementById("central_card_inicial")
 
 const buscador = document.getElementById("buscador")
 const botonBuscar = document.getElementById("boton-buscar")
@@ -57,24 +62,17 @@ let fetchWeather = function(latitud, longitud) {
 
 let mostrarDatos = function (clima) {
     ciudad.innerText = `${clima.ciudad}`;
-
     pais.innerText = `${clima.pais}`;
-
     icono.src = `/icons/${clima.icono}`
-
     descripcion.innerText = `${clima.descripcion}`;
-
     temperaturaActual.innerText = `${clima.temperaturaActual} °C`;
-
     sensacionTermica.innerText = `Sensación térmica ${clima.sensacionTermica} °C`;
-
     presion.innerText = `Presión atmosférica: ${clima.presion} hpa`;
-
     humedad.innerText = `Humedad: ${clima.humedad} %`;
-
     visibilidad.innerText = `Visibilidad: ${clima.visibilidad} km`;
-
     viento.innerText = `Viento: ${clima.velocidadViento} km/h`;
+    centralCardInicial.classList.add("oculto")
+    centralCard.classList.remove("oculto")
 }
 
 botonBuscar.addEventListener("click", ()=>{
@@ -85,10 +83,14 @@ botonBuscar.addEventListener("click", ()=>{
 
 let calcularHora = function (zona) {
     const fecha = new Date()
+    console.log(fecha)
     let hora = fecha.getUTCHours()
     hora = hora + (zona/3600)
     if (hora > 24) {
         hora = hora - 24
+        return hora
+    } else if (hora < 0) {
+        hora = hora + 24
         return hora
     } else {
         return hora
@@ -96,71 +98,72 @@ let calcularHora = function (zona) {
 }
 
 let buscarIcono = function (hora, id) {
+    //condicional dia
     if (6 < hora && hora < 19) {
-        console.log(hora)
-        switch(id){
-            case (200 <= id < 299):
+        console.log("es de dia")
+        switch(true){
+            case (200 <= id && id < 299):
                 return "11d.svg"
                 break;
-            case (300 <= id < 399):
+            case (300 <= id && id < 399):
                 return "09d.svg"
                 break;
-            case (500 <= id < 505):
+            case (500 <= id && id < 505):
                 return "10d.svg"
                 break;
-            case (511 <= id < 699):
+            case (511 <= id && id < 699):
                 return "13d.svg"
                 break;
-            case (700 <= id< 799):
+            case (700 <= id && id < 799):
                 return "50d.svg"
                 break;
-            case 800:
+            case (id === 800):
                 return "01d.svg"
                 break;
-            case 801:
+            case (id === 801):
                 return "02d.svg"
                 break;
-            case 802:
+            case (id === 802):
                 return "03d.svg"
                 break;
-            case 803:
+            case (id === 803):
                 return "04d.svg"
                 break;
-            case 804:
+            case (id === 804):
                 return "04d.svg"
                 break;
         }
     } else {
-        console.log("estas aca! Hora: ", hora)
-        switch(id) {
-            case (id >= 200 && id < 300):
+        console.log("es de noche")
+        switch(true) {
+            case (200 <= id && id < 300):
                 return "11n.svg"
                 break;
-            case (300 <= id < 399):
+            case (300 <= id && id< 399):
                 return "09n.svg"
                 break;
-            case (500 <= id < 505):
+            case (500 <= id && id< 505):
                 return "10n.svg"
                 break;
-            case (511 <= id < 699):
+            case (511 <= id && id< 699):
                 return "13n.svg"
                 break;
-            case (700 <= id < 799):
+            case (700 <= id && id< 799):
                 return "50n.svg"
                 break;
-            case 800:
+            case (id === 800):
                 return "01n.svg"
                 break;
-            case 801:
+            case (id === 801):
                 return "02n.svg"
                 break;
-            case 802:
+            case (id === 802):
                 return "03n.svg"
                 break;
-            case 803:
+            case (id === 803):
                 return "04n.svg"
                 break;
-            case 804:
+            case (id === 804):
                 return "04n.svg"
                 break;
         }
