@@ -27,7 +27,7 @@ body {
 
 .main {
     font-family: 'Ubuntu', sans-serif;
-    padding: 2rem 1rem 2rem 1rem;
+    padding: 2rem;
     background-color: #142058;
     min-width: 100vw;
     min-height: 100vh;
@@ -45,7 +45,7 @@ body {
 .card {
     margin: 1rem 0 1rem 0;
     padding: 0.5rem;
-    height: 80vh;
+    height: 70vh;
     
     width: 100%;
     display: flex;
@@ -129,4 +129,5 @@ body {
     border-radius: 50%;
     padding: 1rem;
     background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 .2rem .5rem ;
 }
