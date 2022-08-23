@@ -21,7 +21,6 @@ const humedad = document.getElementById("humedad")
 const visibilidad = document.getElementById("visibilidad")
 const viento = document.getElementById("viento")
 
-let ubicacion = {}
 // PARA OBTENER LA UBICACIÓN DEL USUARIO
 const options = {
     enableHighAccuracy: true,
