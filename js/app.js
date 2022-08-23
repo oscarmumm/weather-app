@@ -4,9 +4,11 @@ const apikey = "1e0852abb42466a00a4d6d999c3e2b64"
 
 const centralCard = document.getElementById("central_card")
 const centralCardInicial = document.getElementById("central_card_inicial")
+const cardPronostico = document.getElementById("pronostico")
 
 const buscador = document.getElementById("buscador")
 const botonBuscar = document.getElementById("boton-buscar")
+const botonUbicacion = document.getElementById("boton-ubicacion")
 
 const ciudad = document.getElementById("ciudad")
 const pais = document.getElementById("pais")
@@ -19,7 +21,45 @@ const humedad = document.getElementById("humedad")
 const visibilidad = document.getElementById("visibilidad")
 const viento = document.getElementById("viento")
 
-let fetchLocation = function (ubicacion) {
+let ubicacion = {}
+// PARA OBTENER LA UBICACIÓN DEL USUARIO
+const options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+
+function success(pos) {
+    const crd = pos.coords;
+    console.log("Ubicacion obtenida por dispositivo:")
+    console.log(`Latitud: ${crd.latitude}`)
+    console.log(`Longitud: ${crd.longitude}`)
+    console.log(`Presición: ${crd.accuracy} metros`)
+    return ubicacion = {
+            lat: crd.latitude,
+            lon: crd.longitude
+        }
+    }
+    //    console.log('Your current position is:');
+    //    console.log(`Latitude : ${crd.latitude}`);
+    //    console.log(`Longitude: ${crd.longitude}`);
+    //    console.log(`More or less ${crd.accuracy} meters.`);
+    //}
+
+function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+    }
+
+navigator.geolocation.getCurrentPosition(success, error, options);
+
+
+
+botonUbicacion.addEventListener("click", ()=>{
+    console.log("cliqueaste el boton de buscar ubicacion")
+    fetchWeather(ubicacion.lat, ubicacion.lon)
+})
+
+function fetchLocation (ubicacion) {
     fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${ubicacion}"&limit=1&appid=${apikey}`)
         .then((response) => {
             return response.json()
@@ -30,7 +70,7 @@ let fetchLocation = function (ubicacion) {
         })
     }
 
-let fetchWeather = function(latitud, longitud) {
+function fetchWeather (latitud, longitud) {
     console.log("se ejecuta fetchWeather")
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${apikey}&units=metric&lang=sp`)
         .then(response => response.json())
@@ -60,7 +100,7 @@ let fetchWeather = function(latitud, longitud) {
         })
 }
 
-let mostrarDatos = function (clima) {
+function mostrarDatos (clima) {
     ciudad.innerText = `${clima.ciudad}`;
     pais.innerText = `${clima.pais}`;
     icono.src = `/icons/${clima.icono}`
@@ -73,6 +113,7 @@ let mostrarDatos = function (clima) {
     viento.innerText = `Viento: ${clima.velocidadViento} km/h`;
     centralCardInicial.classList.add("oculto")
     centralCard.classList.remove("oculto")
+    cardPronostico.classList.remove("oculto")
 }
 
 botonBuscar.addEventListener("click", ()=>{
@@ -81,7 +122,7 @@ botonBuscar.addEventListener("click", ()=>{
     fetchLocation(ubicacion)
 })
 
-let calcularHora = function (zona) {
+function calcularHora (zona) {
     const fecha = new Date()
     console.log(fecha)
     let hora = fecha.getUTCHours()
@@ -97,7 +138,7 @@ let calcularHora = function (zona) {
     }
 }
 
-let buscarIcono = function (hora, id) {
+function buscarIcono (hora, id) {
     //condicional dia
     if (6 < hora && hora < 19) {
         console.log("es de dia")

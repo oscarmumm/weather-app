@@ -8,39 +8,65 @@
     <title>Weather App</title>
 </head>
 <body>
-    <main>
-        <div class="central_card oculto" id="central_card">
-            <div class="info_principal">
-                <img class="actual icono" src="" alt="icono de clima" id="icono-clima">
-                <h2 class="actual temperatura" id="temperatura-actual">Temperatura actual</h2>
-            </div>
-            <h2 class="actual ciudad" id="ciudad">Ciudad</h2>
-            <p class="actual pais" id="pais">Pais</p>
-            <p class="actual descripcion" id="descripcion">Descripcion</p>
-            <h3 class="actual sensacion" id="sensacion-termica">Sensacion termica</h3>
-            <p class="actual presion" id="presion">Presion</p>
-            <p class="actual humedad" id="humedad">Humedad</p>
-            <p class="actual visibilidad" id="visibilidad">Visibilidad</p>
-            <p class="actual viento" id="viento">Viento</p>
-        </div>
-        <div class="central_card inicial" id="central_card_inicial">
-            <div class="icons-banner">
-                <img src="/icons/09n.svg" alt="">
-                <img src="/icons/01d.svg" alt="">
-                <img src="/icons/02d.svg" alt="">
-                <img src="/icons/11d.svg" alt="">
-            </div>
-            <h1>Bienvenido a la página del clima</h1>
-            <p>Permita el acceso a su ubicación para conocer el clima en su ciudad o utilice la barra de busqueda</p>
-        </div>
-        <div class="barra-de-busqueda">
 
-            <input type="text" name="buscador" id="buscador" class="buscador" placeholder="ingrese nombre de ciudad">
-            <button id="boton-buscar" class="boton-buscar"><img src="/icons/search.svg" alt=""></button>
-        </div>
-    </main>
+    <main class="main">
+        
+        <!-- CONTENIDO CENTRAL DE LA PÁGINA -->
+        <div class="contenedor-central">
+
+            <!-- BARRA DE BUSQUEDA -->
+            <div class="barra-de-busqueda">
+                <input type="text" name="buscador" id="buscador" class="buscador" placeholder="ingrese nombre de ciudad">
+                <button id="boton-buscar" class="boton-buscar"><img src="/icons/search.svg" alt=""></button>
+            </div>
             
+            <!-- CONTENEDOR DE TARJETAS DE INFORMACION -->
+            <section class="cards-container">
+                
+                <!-- TARJETA DE INICIO -->
+                <div class="card inicial" id="central_card_inicial">
+                    <h1>WEATHER-APP</h1>
+                    <div class="icons-banner">
+                        <img src="/icons/09n.svg" alt="">
+                        <img src="/icons/01d.svg" alt="">
+                        <img src="/icons/02d.svg" alt="">
+                        <img src="/icons/11d.svg" alt="">
+                    </div>
+                    <h2>Bienvenido a la página del clima</h2>
+                    <p>Pulse el boton para consultar el clima en su ubicación</p>
+                    <button class="boton-ubicacion" id="boton-ubicacion"><img src="/icons/ubicacion.svg" alt=""></button>
+                    <p>O utilice la barra de busqueda</p>
+                </div>
 
+                <!-- TARJETA DE CLIMA ACTUAL -->
+                <div class="card oculto" id="central_card">
+                    <div class="info-principal">
+                        <img class="actual icono" src="" alt="icono de clima" id="icono-clima">
+                        <h2 class="actual temperatura" id="temperatura-actual">Temperatura actual</h2>
+                    </div>
+                    <h2 class="actual ciudad" id="ciudad">Ciudad</h2>
+                    <p class="actual pais" id="pais">Pais</p>
+                    <p class="actual descripcion" id="descripcion">Descripcion</p>
+                    <h3 class="actual sensacion" id="sensacion-termica">Sensacion termica</h3>
+                    <p class="actual presion" id="presion">Presion</p>
+                    <p class="actual humedad" id="humedad">Humedad</p>
+                    <p class="actual visibilidad" id="visibilidad">Visibilidad</p>
+                    <p class="actual viento" id="viento">Viento</p>
+                </div>
+
+
+                <!-- TARJETA DE PRONOSTICO DEL CLIMA -->
+                <div class="card oculto" id="pronostico">
+                    <h2>Pronóstico extendido</h2>
+                    <p>Próximamante...</p>
+                </div>
+            </section>
+        </div>
+        
+    </main>
+    
+    
+    
     <script src="js/app.js"></script>
 </body>
 </html>

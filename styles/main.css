@@ -12,21 +12,42 @@ font-family: 'Ubuntu', sans-serif;
     margin: 0;
 }
 
-
-main {
-    font-family: 'Ubuntu', sans-serif;
-    padding: 2rem;
-    background-color: #142058;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+body {
+    min-height: 100vh;
 }
 
-.central_card {
+.contenedor-central {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.main {
+    font-family: 'Ubuntu', sans-serif;
+    padding: 2rem 1rem 2rem 1rem;
+    background-color: #142058;
+    min-width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    max-width: 500px;
+}
+
+.cards-container {
+    width: 100%;
+}
+
+.card {
+    margin: 1rem 0 1rem 0;
     padding: 0.5rem;
-    height: 85%;
+    height: 80vh;
     
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -53,11 +74,15 @@ main {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    height: 3rem;
+    border-radius: 30px 30px 30px 30px;
 }
 
 .buscador {
     width: 80%;
-    height: 3rem;
     border-radius: 30px 0 0 30px;
     padding: 1rem;
     border: none;
@@ -80,18 +105,28 @@ main {
 .actual.icono {
     width: 70%;
 }
+
 .actual.ciudad {
     font-size: 2rem;
 }
+
 .actual.temperatura {
     font-size: 2rem;
 }
-.central_card p {
+.card p {
     font-size: 1rem;
 }
-.info_principal {
+
+.info-principal {
     display: flex;
     height: 30%;
     width: 100%;
     align-items: center;
+}
+
+.boton-ubicacion {
+    border: none;
+    border-radius: 50%;
+    padding: 1rem;
+    background-color: rgba(255, 255, 255, 0.2);
 }
