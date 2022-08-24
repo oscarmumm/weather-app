@@ -57,7 +57,8 @@ body {
     align-items: center;
 
     border-radius: 30px;
-    color: #333;
+    color: #000;
+    font-weight: bold;
     background-color: rgba(255, 255, 255, 0.4);
 }
 
@@ -100,6 +101,7 @@ body {
     border-radius: 0 30px 30px 0;
     border: none;
     background-color: #fff;
+    cursor: pointer;
 }
 
 .boton-buscar img {
@@ -134,4 +136,5 @@ body {
     padding: 1rem;
     background-color: rgba(255, 255, 255, 0.2);
     box-shadow: 0 .2rem .5rem ;
+    cursor: pointer;
 }

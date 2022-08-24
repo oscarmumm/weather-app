@@ -31,20 +31,11 @@ const options = {
 
 function success(pos) {
     const crd = pos.coords;
-    console.log("Ubicacion obtenida por dispositivo:")
-    console.log(`Latitud: ${crd.latitude}`)
-    console.log(`Longitud: ${crd.longitude}`)
-    console.log(`Presición: ${crd.accuracy} metros`)
     return ubicacion = {
             lat: crd.latitude,
             lon: crd.longitude
         }
     }
-    //    console.log('Your current position is:');
-    //    console.log(`Latitude : ${crd.latitude}`);
-    //    console.log(`Longitude: ${crd.longitude}`);
-    //    console.log(`More or less ${crd.accuracy} meters.`);
-    //}
 
 function error(err) {
         console.warn(`ERROR(${err.code}): ${err.message}`);
@@ -55,7 +46,6 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 
 botonUbicacion.addEventListener("click", ()=>{
-    console.log("cliqueaste el boton de buscar ubicacion")
     fetchWeather(ubicacion.lat, ubicacion.lon)
 })
 
@@ -65,18 +55,14 @@ function fetchLocation (ubicacion) {
             return response.json()
         })
         .then((data) => {
-            //console.log('data:', data)
             fetchWeather(data[0].lat, data[0].lon)
         })
     }
 
 function fetchWeather (latitud, longitud) {
-    console.log("se ejecuta fetchWeather")
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${apikey}&units=metric&lang=sp`)
         .then(response => response.json())
         .then((data) => {
-            console.log(data)
-            console.log(data.weather[0].id)
             return clima = {
                 ciudad: data.name,
                 pais: data.sys.country,
@@ -96,7 +82,6 @@ function fetchWeather (latitud, longitud) {
             }
         })
         .then(clima => {
-            console.log(clima)
             mostrarDatos(clima)
         })
 }
@@ -115,18 +100,27 @@ function mostrarDatos (clima) {
     body.style.backgroundImage = clima.fondo
     centralCardInicial.classList.add("oculto")
     centralCard.classList.remove("oculto")
-    cardPronostico.classList.remove("oculto")
+    //cardPronostico.classList.remove("oculto")
 }
 
 botonBuscar.addEventListener("click", ()=>{
     let ubicacion = buscador.value
-    console.log('ubicacion:', ubicacion)
     fetchLocation(ubicacion)
 })
 
+document.addEventListener("keyup", function(e) {
+    if (e.key === "Enter") {
+        let ubicacion = buscador.value
+        if(buscador.value === "") {
+            alert("Por favor ingrese una ubicación válida")
+        } else {
+            fetchLocation(ubicacion)
+        }
+    }
+});
+
 function calcularHora (zona) {
     const fecha = new Date()
-    console.log(fecha)
     let hora = fecha.getUTCHours()
     hora = hora + (zona/3600)
     if (hora > 24) {
@@ -142,7 +136,6 @@ function calcularHora (zona) {
 
 function buscarIcono (hora, id) {
     if (6 < hora && hora < 19) {
-        console.log("es de dia")
         switch(true){
             case (200 <= id && id < 299):
                 return ["11d.svg", "url(/img/tormenta_electrica.webp)"]
@@ -176,7 +169,6 @@ function buscarIcono (hora, id) {
                 break;
         }
     } else {
-        console.log("es de noche")
         switch(true) {
             case (200 <= id && id < 300):
                 return ["11n.svg", "url(/img/tormenta_electrica.webp)"]
