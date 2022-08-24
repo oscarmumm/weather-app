@@ -98,6 +98,7 @@ function mostrarDatos (clima) {
     visibilidad.innerText = `Visibilidad: ${clima.visibilidad} km`;
     viento.innerText = `Viento: ${clima.velocidadViento} km/h`;
     body.style.backgroundImage = clima.fondo
+    buscador.value = ""
     centralCardInicial.classList.add("oculto")
     centralCard.classList.remove("oculto")
     //cardPronostico.classList.remove("oculto")
