@@ -139,7 +139,7 @@ function buscarIcono (hora, id) {
     if (6 < hora && hora < 19) {
         switch(true){
             case (200 <= id && id < 299):
-                return ["11d.svg", "url(/img/tormenta_electrica.webp)"]
+                return ["11d.svg", "url(/img/dia_tormenta_electrica.webp)"]
                 break;
             case (300 <= id && id < 399):
                 return ["09d.svg", "url(/img/dia_lluvia.webp)"]
@@ -172,7 +172,7 @@ function buscarIcono (hora, id) {
     } else {
         switch(true) {
             case (200 <= id && id < 300):
-                return ["11n.svg", "url(/img/tormenta_electrica.webp)"]
+                return ["11n.svg", "url(/img/noche_tormenta_electrica.webp)"]
                 break;
             case (300 <= id && id < 399):
                 return ["09n.svg", "url(/img/noche_lluvia.webp)"]
