@@ -46,7 +46,14 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 
 botonUbicacion.addEventListener("click", ()=>{
-    fetchWeather(ubicacion.lat, ubicacion.lon)
+    fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${ubicacion.lat}&lon=${ubicacion.lon}&limit=1&appid=${apikey}`)
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) =>{
+            fetchWeather(ubicacion.lat, ubicacion.lon)
+            return nombreCiudad = data[0].local_names.es
+        })
 })
 
 function fetchLocation (ubicacion) {
@@ -55,8 +62,9 @@ function fetchLocation (ubicacion) {
             return response.json()
         })
         .then((data) => {
+            console.log(data)
             fetchWeather(data[0].lat, data[0].lon)
-            return nombreCiudad = data[0].name
+            return nombreCiudad = data[0].local_names.es
         })
     }
 
