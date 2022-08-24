@@ -2,6 +2,7 @@
 
 const apikey = "1e0852abb42466a00a4d6d999c3e2b64"
 
+const body = document.querySelector("body")
 const centralCard = document.getElementById("central_card")
 const centralCardInicial = document.getElementById("central_card_inicial")
 const cardPronostico = document.getElementById("pronostico")
@@ -80,8 +81,9 @@ function fetchWeather (latitud, longitud) {
                 ciudad: data.name,
                 pais: data.sys.country,
                 id: data.weather[0].id,
-                icono: buscarIcono(calcularHora(data.timezone), data.weather[0].id),
+                icono: buscarIcono(calcularHora(data.timezone), data.weather[0].id)[0],
                 descripcion: data.weather[0].description,
+                fondo: buscarIcono(calcularHora(data.timezone), data.weather[0].id)[1],
                 temperaturaActual: Math.round(data.main.temp),
                 sensacionTermica: Math.round(data.main.feels_like),
                 temperaturaMaxima: Math.round(data.main.temp_max),
@@ -110,6 +112,7 @@ function mostrarDatos (clima) {
     humedad.innerText = `Humedad: ${clima.humedad} %`;
     visibilidad.innerText = `Visibilidad: ${clima.visibilidad} km`;
     viento.innerText = `Viento: ${clima.velocidadViento} km/h`;
+    body.style.backgroundImage = clima.fondo
     centralCardInicial.classList.add("oculto")
     centralCard.classList.remove("oculto")
     cardPronostico.classList.remove("oculto")
@@ -138,73 +141,72 @@ function calcularHora (zona) {
 }
 
 function buscarIcono (hora, id) {
-    //condicional dia
     if (6 < hora && hora < 19) {
         console.log("es de dia")
         switch(true){
             case (200 <= id && id < 299):
-                return "11d.svg"
+                return ["11d.svg", "url(/img/tormenta_electrica.webp)"]
                 break;
             case (300 <= id && id < 399):
-                return "09d.svg"
+                return ["09d.svg", "url(/img/dia_lluvia.webp)"]
                 break;
-            case (500 <= id && id < 505):
-                return "10d.svg"
+            case (500 <= id && id < 600):
+                return ["10d.svg", "url(/img/dia_lluvia.webp)"]
                 break;
-            case (511 <= id && id < 699):
-                return "13d.svg"
+            case (600 <= id && id < 699):
+                return ["13d.svg", "url(/img/dia_nevando.webp)"]
                 break;
             case (700 <= id && id < 799):
-                return "50d.svg"
+                return ["50d.svg", "url(/img/dia_niebla.webp)"]
                 break;
             case (id === 800):
-                return "01d.svg"
+                return ["01d.svg", "url(/img/dia_despejado.webp)"]
                 break;
             case (id === 801):
-                return "02d.svg"
+                return ["02d.svg", "url(/img/dia_nublado.webp)"]
                 break;
             case (id === 802):
-                return "03d.svg"
+                return ["03d.svg", "url(/img/dia_nublado.webp)"]
                 break;
             case (id === 803):
-                return "04d.svg"
+                return ["04d.svg", "url(/img/dia_nublado.webp)"]
                 break;
             case (id === 804):
-                return "04d.svg"
+                return ["04d.svg", "url(/img/dia_nublado.webp)"]
                 break;
         }
     } else {
         console.log("es de noche")
         switch(true) {
             case (200 <= id && id < 300):
-                return "11n.svg"
+                return ["11n.svg", "url(/img/tormenta_electrica.webp)"]
                 break;
-            case (300 <= id && id< 399):
-                return "09n.svg"
+            case (300 <= id && id < 399):
+                return ["09n.svg", "url(/img/noche_lluvia.webp)"]
                 break;
-            case (500 <= id && id< 505):
-                return "10n.svg"
+            case (500 <= id && id < 600):
+                return ["10n.svg", "url(/img/noche_lluvia.webp)"]
                 break;
-            case (511 <= id && id< 699):
-                return "13n.svg"
+            case (600 <= id && id < 699):
+                return ["13n.svg", "url(/img/noche_nevando.webp)"]
                 break;
-            case (700 <= id && id< 799):
-                return "50n.svg"
+            case (700 <= id && id < 799):
+                return ["50n.svg", "url(/img/noche_niebla.webp)"]
                 break;
             case (id === 800):
-                return "01n.svg"
+                return ["01n.svg", "url(/img/noche_despejada.webp)"]
                 break;
             case (id === 801):
-                return "02n.svg"
+                return ["02n.svg", "url(/img/noche_nublada.webp)"]
                 break;
             case (id === 802):
-                return "03n.svg"
+                return ["03n.svg", "url(/img/noche_nublada.webp)"]
                 break;
             case (id === 803):
-                return "04n.svg"
+                return ["04n.svg", "url(/img/noche_nublada.webp)"]
                 break;
             case (id === 804):
-                return "04n.svg"
+                return ["04n.svg", "url(/img/noche_nublada.webp)"]
                 break;
         }
     }
