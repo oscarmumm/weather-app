@@ -56,6 +56,7 @@ function fetchLocation (ubicacion) {
         })
         .then((data) => {
             fetchWeather(data[0].lat, data[0].lon)
+            return nombreCiudad = data[0].name
         })
     }
 
@@ -63,8 +64,9 @@ function fetchWeather (latitud, longitud) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${apikey}&units=metric&lang=sp`)
         .then(response => response.json())
         .then((data) => {
+            console.log(data)
             return clima = {
-                ciudad: data.name,
+                ciudad: nombreCiudad,
                 pais: data.sys.country,
                 id: data.weather[0].id,
                 icono: buscarIcono(calcularHora(data.timezone), data.weather[0].id)[0],
