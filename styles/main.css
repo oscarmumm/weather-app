@@ -31,7 +31,6 @@ body {
 .main {
     font-family: 'Ubuntu', sans-serif;
     padding: 2rem;
-    /* background-color: #142058; */
     min-width: 100vw;
     min-height: 100vh;
     display: flex;
@@ -109,7 +108,7 @@ body {
 }
 
 .actual.icono {
-    width: 70%;
+    width: 100%;
 }
 
 .actual.ciudad {

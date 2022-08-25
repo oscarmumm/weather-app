@@ -98,9 +98,9 @@ function fetchWeather (latitud, longitud) {
 
 function mostrarDatos (clima) {
     ciudad.innerText = `${clima.ciudad}`;
-    pais.innerText = `${clima.pais}`;
+    pais.innerText = `País: ${clima.pais}`;
     icono.src = `/icons/${clima.icono}`
-    descripcion.innerText = `${clima.descripcion}`;
+    descripcion.innerText = `${clima.descripcion}`.charAt(0).toUpperCase()+`${clima.descripcion}`.slice(1);
     temperaturaActual.innerText = `${clima.temperaturaActual} °C`;
     sensacionTermica.innerText = `Sensación térmica ${clima.sensacionTermica} °C`;
     presion.innerText = `Presión atmosférica: ${clima.presion} hpa`;
