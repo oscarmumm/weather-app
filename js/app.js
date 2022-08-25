@@ -52,7 +52,7 @@ botonUbicacion.addEventListener("click", ()=>{
         })
         .then((data) =>{
             fetchWeather(ubicacion.lat, ubicacion.lon)
-            return nombreCiudad = data[0].local_names.es
+            return nombreCiudad = data[0].name
         })
 })
 
@@ -64,7 +64,7 @@ function fetchLocation (ubicacion) {
         .then((data) => {
             console.log(data)
             fetchWeather(data[0].lat, data[0].lon)
-            return nombreCiudad = data[0].local_names.es
+            return nombreCiudad = data[0].name
         })
     }
 
