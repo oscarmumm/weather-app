@@ -31,6 +31,7 @@ const options = {
 
 function success(pos) {
     const crd = pos.coords;
+    console.log("location ready")
     return ubicacion = {
             lat: crd.latitude,
             lon: crd.longitude
@@ -62,7 +63,6 @@ function fetchLocation (ubicacion) {
             return response.json()
         })
         .then((data) => {
-            console.log(data)
             fetchWeather(data[0].lat, data[0].lon)
             return nombreCiudad = data[0].name
         })
@@ -72,7 +72,6 @@ function fetchWeather (latitud, longitud) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${apikey}&units=metric&lang=sp`)
         .then(response => response.json())
         .then((data) => {
-            console.log(data)
             return clima = {
                 ciudad: nombreCiudad,
                 pais: data.sys.country,
