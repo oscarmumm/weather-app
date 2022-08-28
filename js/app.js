@@ -101,8 +101,8 @@ function mostrarDatos (clima) {
     icono.src = `/icons/${clima.icono}`
     descripcion.innerText = `${clima.descripcion}`.charAt(0).toUpperCase()+`${clima.descripcion}`.slice(1);
     temperaturaActual.innerText = `${clima.temperaturaActual} °C`;
-    sensacionTermica.innerText = `Sensación térmica ${clima.sensacionTermica} °C`;
-    presion.innerText = `Presión atmosférica: ${clima.presion} hpa`;
+    sensacionTermica.innerText = `ST: ${clima.sensacionTermica} °C`;
+    presion.innerText = `Presión atmosférica: ${clima.presion} hPa`;
     humedad.innerText = `Humedad: ${clima.humedad} %`;
     visibilidad.innerText = `Visibilidad: ${clima.visibilidad} km`;
     viento.innerText = `Viento: ${clima.velocidadViento} km/h`;
