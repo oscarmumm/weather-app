@@ -1,16 +1,16 @@
 /*
 Google Fonts
 
-font-family: 'Ubuntu', sans-serif;
+font-family: 'Open Sans', sans-serif;
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    z-index: 1;
 }
 
 body {
@@ -18,6 +18,7 @@ body {
     background-image: url(/img/main_background.jpeg);
     background-repeat: no-repeat;
     background-size: cover;
+    min-height: 500px;
 }
 
 .contenedor-central {
@@ -30,7 +31,8 @@ body {
 }
 
 .main {
-    font-family: 'Ubuntu', sans-serif;
+    font-family: 'Open Sans', sans-serif;
+    /* font-family: 'Ubuntu', sans-serif; */
     padding: 2rem;
     min-width: 100vw;
     min-height: 100vh;
@@ -49,6 +51,7 @@ body {
     margin: 1rem 0 1rem 0;
     padding: 0.5rem;
     height: 70vh;
+    min-height: 400px;
     
     width: 100%;
     display: flex;
@@ -139,7 +142,7 @@ body {
     cursor: pointer;
 }
 
-@media screen and (orientation: landscape) {
+@media (orientation: landscape) {
     .card {
         flex-direction: row;
     }
@@ -154,5 +157,8 @@ body {
     }
     .boton-ubicacion {
         padding: 0.25rem;
+    }
+    .actual.icono {
+        width: 150%;
     }
 }
