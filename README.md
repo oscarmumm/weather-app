@@ -4,6 +4,6 @@
 https://open-meteo.com/
 
 ## Librerías utilizadas
-- tailwindcss
-- motion
-- react-icons
+- tailwindcss (https://tailwindcss.com/docs/installation/using-vite)
+- motion (https://motion.dev/docs/react)
+- react-icons (https://react-icons.github.io/react-icons/)
