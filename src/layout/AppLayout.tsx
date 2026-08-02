@@ -6,7 +6,9 @@ export const AppLayout = () => {
     return (
         <div className="min-h-screen bg-cyan-700 flex flex-col items-center justify-between">
             <Searchbar />
-            <Outlet />
+            <div className='pt-24'>
+                <Outlet />
+            </div>
             <Footer />
         </div>
     );

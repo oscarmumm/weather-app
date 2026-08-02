@@ -56,7 +56,7 @@ export const Searchbar = () => {
     }, [searchTerm]);
 
     return (
-        <div className="p-3 w-full">
+        <div className="p-3 w-full z-10 fixed">
             <form
                 className="bg-white rounded-xl flex justify-between"
                 onSubmit={searchLocations}>
