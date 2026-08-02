@@ -3,6 +3,7 @@ import { MdSearch } from 'react-icons/md';
 import { fetchLocations } from '../services/geocodingService';
 import type { Location } from '../types';
 import { motion, AnimatePresence } from 'motion/react';
+import { NavLink, useNavigate } from 'react-router';
 
 const resultsListAnimation = {
     open: {
@@ -19,11 +20,14 @@ export const Searchbar = () => {
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [searchResults, setSearchResults] = useState([]);
     const [showErrorMessage, setShowErrorMessage] = useState(false);
+    let navigate = useNavigate();
 
     async function searchLocations(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const data = await fetchLocations({ name: searchTerm });
         setSearchResults(data.results);
+        navigate('locations-list', { state: data.results });
+        setSearchResults([]);
     }
 
     useEffect(() => {
@@ -56,36 +60,46 @@ export const Searchbar = () => {
     }, [searchTerm]);
 
     return (
-        <div className="p-3 w-full z-10 fixed">
+        <div className='p-3 w-full z-10 fixed'>
             <form
-                className="bg-white rounded-xl flex justify-between"
-                onSubmit={searchLocations}>
+                className='bg-white rounded-xl flex justify-between'
+                onSubmit={searchLocations}
+            >
                 <input
-                    type="text"
-                    placeholder="Ingrese el nombre de la ciudad"
+                    type='text'
+                    placeholder='Ingrese el nombre de la ciudad'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
-                    className="p-3 outline-none w-full"
+                    className='p-3 outline-none w-full'
                 />
-                <button className="p-3 text-xl">
+                <button className='p-3 text-xl'>
                     <MdSearch />
                 </button>
             </form>
-            <ul className="bg-white rounded-xl mt-3">
+            <ul className='bg-white rounded-xl mt-3'>
                 <AnimatePresence>
                     {searchResults.map((location: Location) => (
                         <motion.li
                             variants={resultsListAnimation}
-                            initial="closed"
-                            transition={{type: 'tween'}}
-                            animate="open"
+                            initial='closed'
+                            transition={{ type: 'tween' }}
+                            animate='open'
                             key={location.id}
-                            className="p-3">
-                            {location.name}, {location.country}
+                            className='p-3'
+                        >
+                            <NavLink
+                                to={`/locations/${location.id}?lat=${location.latitude}&lon=${location.longitude}`}
+                                onClick={() => {
+                                    setSearchResults([]);
+                                    setSearchTerm('');
+                                }}
+                            >
+                                {location.name}, {location.country}
+                            </NavLink>
                         </motion.li>
                     ))}
                     {showErrorMessage && (
-                        <li className="p-3">
+                        <li className='p-3'>
                             No se encontraron resultados para la búsqueda
                         </li>
                     )}

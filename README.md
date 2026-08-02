@@ -1,7 +1,7 @@
 # Weather App
 
 ## API
-https://open-meteo.com/
+- OpenMeteo (https://open-meteo.com/)
 
 ## Librerías utilizadas
 - tailwindcss (https://tailwindcss.com/docs/installation/using-vite)
