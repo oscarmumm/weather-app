@@ -1,8 +1,9 @@
 import { Route, Routes, BrowserRouter } from 'react-router';
 import { Home } from '../pages/Home';
 import { AppLayout } from '../layout/AppLayout';
-import { Locations } from '../pages/Locations';
+import { Weather } from '../pages/Weather';
 import { LocationsList } from '../pages/LocationsList';
+import { Favorites } from '../pages/Favorites';
 
 export const AppRouter = () => {
     return (
@@ -12,9 +13,10 @@ export const AppRouter = () => {
                     <Route path='/' element={<Home />} />
                     <Route
                         path='/locations/:locationId'
-                        element={<Locations />}
+                        element={<Weather />}
                     />
                     <Route path='/locations-list' element={<LocationsList />} />
+                    <Route path='/favorites' element={<Favorites />} />
                 </Route>
             </Routes>
         </BrowserRouter>
