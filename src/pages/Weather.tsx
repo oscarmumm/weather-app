@@ -4,6 +4,8 @@ import { MdFavoriteBorder } from 'react-icons/md';
 import { MdFavorite } from 'react-icons/md';
 import { fetchCurrentWeather } from '../services/weatherService';
 import type { currentWeather } from '../types';
+import { motion } from 'motion/react';
+import { getWeatherCondition } from '../utils/getWeatherCondition';
 
 export const Weather = () => {
     const [searchParams] = useSearchParams();
@@ -12,10 +14,12 @@ export const Weather = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [currentWeather, setCurrentWeather] = useState<currentWeather>();
+    const temp = currentWeather ? Math.round(currentWeather.temperature_2m * 10) / 10 : null;
+    const condition = currentWeather ? getWeatherCondition(currentWeather.weather_code) : null;
 
     useEffect(() => {
         if (!lat || !lon) return;
-        console.log(`latitude: ${lat}. longitude: ${lon}`)
+        console.log(`latitude: ${lat}. longitude: ${lon}`);
         const loadCurrentWeather = async () => {
             setIsLoading(true);
 
@@ -24,10 +28,13 @@ export const Weather = () => {
                     latitude: Number(lat),
                     longitude: Number(lon),
                 });
-                console.log(currentWeatherData)
+                console.log(currentWeatherData);
                 setCurrentWeather(currentWeatherData);
             } catch (error) {
-                console.error('Error al obtener los datos actuales del tiempo', error);
+                console.error(
+                    'Error al obtener los datos actuales del tiempo',
+                    error,
+                );
             } finally {
                 setIsLoading(false);
             }
@@ -37,22 +44,44 @@ export const Weather = () => {
 
     return (
         <div>
-            {isLoading && <p>Weather information is loading</p>}
+            {isLoading ? (
+                <p>Weather information is loading</p>
+            ) : (
+                <motion.div>
+                    <p>Add location to favorites</p>
+                    <button>
+                        {/* location is not in favs list */}
+                        <MdFavoriteBorder />
+                        {/* location is in favs list */}
+                        <MdFavorite />
+                    </button>
 
-            <p>Add location to favorites</p>
-            <button>
-                {/* location is not in favs list */}
-                <MdFavoriteBorder />
-                {/* location is in favs list */}
-                <MdFavorite />
-            </button>
-
-            <h2>Weather</h2>
-            <p>lat = {lat}</p>
-            <p>lon = {lon}</p>
-            <p>Temperatura: {currentWeather?.temperature_2m}</p>
-            <p>Sensación térmica: {currentWeather?.apparent_temperature}</p>
-            <p>Presión atmosférica: {currentWeather?.surface_pressure}</p>
+                    <h2>Weather</h2>
+                    <p>lat = {lat}</p>
+                    <p>lon = {lon}</p>
+                    <p>
+                        Temperatura: {temp} °C
+                    </p>
+                    <p>
+                        Sensación térmica:{' '}
+                        {currentWeather &&
+                            Math.round(
+                                currentWeather.apparent_temperature * 10,
+                            ) / 10}{' '}
+                        °C
+                    </p>
+                    <p>
+                        Presión atmosférica:{' '}
+                        {currentWeather &&
+                            Math.round(currentWeather.surface_pressure * 10) /
+                                10}{' '}
+                        hpa
+                    </p>
+                    <p>
+                        Descripcion: {condition?.description}
+                    </p>
+                </motion.div>
+            )}
         </div>
     );
 };
