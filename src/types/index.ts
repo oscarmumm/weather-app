@@ -25,3 +25,22 @@ export type currentWeather = {
     wind_gusts_10m: number;
     wind_speed_10m: number;
 };
+
+export type hourlyWeather = {
+    time: Date[];
+    temperature_2m: Float32Array | null;
+    precipitation_probability: Float32Array | null;
+    weather_code: Float32Array | null;
+};
+
+export type dailyWeather = {
+    precipitation_probability_max: Float32Array | null;
+    sunrise: Date[];
+    sunset: Date[];
+    temperature_2m_max: Float32Array | null;
+    temperature_2m_min: Float32Array | null;
+    time: Date[];
+    uv_index_clear_sky_max: Float32Array | null;
+    uv_index_max: Float32Array | null;
+    weather_code: Float32Array | null;
+};

@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { MdFavorite } from 'react-icons/md';
-import { fetchCurrentWeather } from '../services/weatherService';
+import { fetchWeatherData } from '../services/weatherService';
 import type { currentWeather } from '../types';
+import type { dailyWeather } from '../types';
+import type { hourlyWeather } from '../types';
 import { motion } from 'motion/react';
 import { getWeatherCondition } from '../utils/getWeatherCondition';
+import { CurrentWeatherSection } from '../components/CurrentWeatherSection';
+import { DailyWeatherSection } from '../components/DailyWeatherSection';
+import { HourlyWeatherSection } from '../components/HourlyWeatherSection';
 
 export const Weather = () => {
     const [searchParams] = useSearchParams();
@@ -14,8 +19,8 @@ export const Weather = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [currentWeather, setCurrentWeather] = useState<currentWeather>();
-    const temp = currentWeather ? Math.round(currentWeather.temperature_2m * 10) / 10 : null;
-    const condition = currentWeather ? getWeatherCondition(currentWeather.weather_code) : null;
+    const [hourlyWeather, setHourlyWeather] = useState<hourlyWeather>();
+    const [dailyWeather, setDailyWeather] = useState<dailyWeather>();
 
     useEffect(() => {
         if (!lat || !lon) return;
@@ -24,12 +29,13 @@ export const Weather = () => {
             setIsLoading(true);
 
             try {
-                const currentWeatherData = await fetchCurrentWeather({
+                const weatherData = await fetchWeatherData({
                     latitude: Number(lat),
                     longitude: Number(lon),
                 });
-                console.log(currentWeatherData);
-                setCurrentWeather(currentWeatherData);
+                setCurrentWeather(weatherData.current);
+                setHourlyWeather(weatherData.hourly);
+                setDailyWeather(weatherData.daily);
             } catch (error) {
                 console.error(
                     'Error al obtener los datos actuales del tiempo',
@@ -55,31 +61,9 @@ export const Weather = () => {
                         {/* location is in favs list */}
                         <MdFavorite />
                     </button>
-
-                    <h2>Weather</h2>
-                    <p>lat = {lat}</p>
-                    <p>lon = {lon}</p>
-                    <p>
-                        Temperatura: {temp} °C
-                    </p>
-                    <p>
-                        Sensación térmica:{' '}
-                        {currentWeather &&
-                            Math.round(
-                                currentWeather.apparent_temperature * 10,
-                            ) / 10}{' '}
-                        °C
-                    </p>
-                    <p>
-                        Presión atmosférica:{' '}
-                        {currentWeather &&
-                            Math.round(currentWeather.surface_pressure * 10) /
-                                10}{' '}
-                        hpa
-                    </p>
-                    <p>
-                        Descripcion: {condition?.description}
-                    </p>
+                    <CurrentWeatherSection data={currentWeather} />
+                    <DailyWeatherSection data={dailyWeather} />
+                    <HourlyWeatherSection data={hourlyWeather} />
                 </motion.div>
             )}
         </div>
