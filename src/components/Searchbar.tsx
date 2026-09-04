@@ -44,7 +44,7 @@ export const Searchbar = () => {
                     const locations = data?.results ?? [];
                     setSearchResults(locations);
                     setShowErrorMessage(locations.length === 0);
-                    console.log(locations);
+                    // console.log(locations);
                 }
             } catch (error) {
                 if (!isCancelled) {

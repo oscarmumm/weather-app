@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { motion } from 'motion/react';
 import { useSearchParams } from 'react-router';
 import { MdFavoriteBorder } from 'react-icons/md';
 import { MdFavorite } from 'react-icons/md';
@@ -6,8 +7,6 @@ import { fetchWeatherData } from '../services/weatherService';
 import type { currentWeather } from '../types';
 import type { dailyWeather } from '../types';
 import type { hourlyWeather } from '../types';
-import { motion } from 'motion/react';
-import { getWeatherCondition } from '../utils/getWeatherCondition';
 import { CurrentWeatherSection } from '../components/CurrentWeatherSection';
 import { DailyWeatherSection } from '../components/DailyWeatherSection';
 import { HourlyWeatherSection } from '../components/HourlyWeatherSection';
@@ -49,11 +48,11 @@ export const Weather = () => {
     }, [lat, lon]);
 
     return (
-        <div>
+        <div className=''>
             {isLoading ? (
                 <p>Weather information is loading</p>
             ) : (
-                <motion.div>
+                <motion.div className=''>
                     <p>Add location to favorites</p>
                     <button>
                         {/* location is not in favs list */}
@@ -62,8 +61,8 @@ export const Weather = () => {
                         <MdFavorite />
                     </button>
                     <CurrentWeatherSection data={currentWeather} />
-                    <DailyWeatherSection data={dailyWeather} />
                     <HourlyWeatherSection data={hourlyWeather} />
+                    <DailyWeatherSection data={dailyWeather} />
                 </motion.div>
             )}
         </div>

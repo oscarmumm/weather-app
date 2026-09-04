@@ -4,9 +4,9 @@ import { Outlet } from 'react-router';
 
 export const AppLayout = () => {
     return (
-        <div className="min-h-screen bg-cyan-700 flex flex-col items-center justify-between">
+        <div className="min-h-screen max-w-screen bg-cyan-700 flex flex-col items-center justify-between">
             <Searchbar />
-            <div className='pt-24'>
+            <div className='pt-24 w-full'>
                 <Outlet />
             </div>
             <Footer />
